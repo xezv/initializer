@@ -1,0 +1,244 @@
+# ========================================================================
+#
+# 1. common config
+#
+# ========================================================================
+[language-config]
+auto-format = true
+indent = { tab-width = 4, unit = "    " }
+
+# ========================================================================
+#
+# 2. language config
+#
+# ========================================================================
+
+# ------------------------------------------------------------------------
+# rust
+# ------------------------------------------------------------------------
+[[language]]
+name = "rust"
+scope = "source.rust"
+injection-regex = "rs|rust"
+file-types = ["rs"]
+roots = ["Cargo.toml", "Cargo.lock"]
+shebangs = ["rust-script", "cargo"]
+language-servers = ["rust-analyzer"]
+# formatter = { command = "bash", args = ["-c", "rustfmt | dx fmt -f -"] } 
+
+
+[language-server.rust-analyzer]
+command = "rust-analyzer"
+
+[language-server.rust-analyzer.config]
+completion = { addCallParenthesis = false, postfix = { enabled = false } }
+checkOnSave = { command = "clippy" }
+cargo = { allFeatures = true }
+procMacro = { enable = true }
+inlayHints.chainingHints.enable = true
+inlayHints.closingBraceHints.enable = true
+
+# ------------------------------------------------------------------------
+# Go
+# ------------------------------------------------------------------------
+[[language]]
+name = "go"
+language-servers = ["gopls", "golangci-lint-lsp"]
+
+# ------------------------------------------------------------------------  
+# json
+# ------------------------------------------------------------------------
+[[language]]
+name = "json"
+formatter = { command = "prettier", args = ["--parser", "json"] }
+
+# ------------------------------------------------------------------------
+# C
+# ------------------------------------------------------------------------
+[[language]]
+name = "c"
+scope = "source.c"
+injection-regex = "c"
+file-types = ["c", "h"]
+# comment-token = "//"
+# block-comment-tokens = { start = "/*", end = "*/" }
+formatter = { command = "clang-format", args = ['--style=file'] }
+language-servers = ["clangd"]
+indent = { tab-width = 2, unit = "  " }
+auto-format = true
+
+# [language.debugger]
+# name = "lldb-dap"
+# transport = "stdio"
+# command = "lldb-dap"
+
+# [[language]]
+# name = "python"
+# language-servers = ["pylsp"]
+# roots = [".git"]
+
+# [language.config.pylsp.plugins]
+# flake8 = { enabled = false }
+# autopep8 = { enabled = false }
+# mccabe = { enabled = false }
+# pycodestyle = { enabled = false }
+# pyfalkes = { enabled = false }
+# yapf= { enabled = false }
+# ruff = { enabled = true, ignore = ["F401"], lineLength = 120 }
+
+
+# ========================================================================
+#
+# 3. configuration language config
+#
+# ========================================================================
+
+# ------------------------------------------------------------------------
+# yaml
+# ------------------------------------------------------------------------
+[[language]]
+name = "yaml"
+scope = "source.yaml"
+file-types = ["yaml", "yml"]
+roots = [".github"]
+comment-token = "#"
+# language-servers = [ { command = "yaml-language-server", args = ["--stdio"] } ]
+# config = { yaml = { schemas = { "https://json.schemastore.org/github-workflow.json" = "/.github/workflows/*.{yml,yaml}" } } }
+
+# config = {
+#   yaml = {
+#     schema = {
+#       kubernetes = "/*.yaml",
+#       format = {enable = true}
+#     }
+#   }
+# }
+
+[language-server.yaml-language-server]
+command = "yaml-language-server"
+args = ["--stdio"]
+
+# ------------------------------------------------------------------------
+# toml
+# ------------------------------------------------------------------------
+[[language]]
+name = "toml"
+language-servers = ["taplo"]
+indent = { tab-width = 2, unit = "  " }
+
+# ========================================================================
+#
+# 4. Shell scripting language config
+#
+# ========================================================================
+
+
+# ------------------------------------------------------------------------
+# bash
+# ------------------------------------------------------------------------
+[[language]]
+name = "bash"
+formatter = { command = "shfmt", args = ["-i", "2", "-ci"] }
+auto-format = true
+
+
+## TS
+
+[language-server.eslint]
+command = "vscode-eslint-language-server"
+args = ["--stdio"]
+
+[language-server.eslint.config]
+codeActionsOnSave = { mode = "all", "source.fixAll.eslint" = true }
+format = { enable = true }
+nodePath = ""
+quiet = false
+rulesCustomizations = []
+run = "onType"
+validate = "on"
+experimental = {}
+problems = { shortenToSingleLine = false }
+
+[language-server.eslint.config.codeAction]
+disableRuleComment = { enable = true, location = "separateLine" }
+showDocumentation = { enable = false }
+
+[language-server.vscode-json-language-server.config]
+json = { validate = { enable = true }, format = { enable = true } }
+provideFormatter = true
+
+[language-server.vscode-css-language-server.config]
+css = { validate = { enable = true } }
+scss = { validate = { enable = true } }
+less = { validate = { enable = true } }
+provideFormatter = true
+
+
+[[language]]
+name = "typescript"
+language-servers = [
+    "typescript-language-server",
+    "eslint",
+    "emmet-ls",
+    "tailwindcss-ls",
+]
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+# formatter = { command = "dprint", args = [ "fmt", "--stdin", "typescript" ] }
+auto-format = true
+
+[[language]]
+name = "tsx"
+# language-servers = [ "deno", "eslint", "emmet-ls" ]
+language-servers = [
+    "typescript-language-server",
+    "eslint",
+    "emmet-ls",
+    "tailwindcss-ls",
+]
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+# formatter = { command = "dprint", args = [ "fmt", "--stdin", "tsx" ] }
+auto-format = true
+
+[[language]]
+name = "javascript"
+language-servers = [
+    "typescript-language-server",
+    "eslint",
+    "emmet-ls",
+    "tailwindcss-ls",
+]
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+# formatter = { command = "dprint", args = [ "fmt", "--stdin", "javascript" ] }
+auto-format = true
+
+[[language]]
+name = "jsx"
+language-servers = [
+    "typescript-language-server",
+    "eslint",
+    "emmet-ls",
+    "tailwindcss-ls",
+]
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+# formatter = { command = "dprint", args = [ "fmt", "--stdin", "jsx" ] }
+auto-format = true
+
+[[language]]
+name = "json"
+formatter = { command = "prettier", args = ["--parser", "json"] }
+# formatter = { command = "dprint", args = [ "fmt", "--stdin", "json" ] }
+auto-format = true
+
+[[language]]
+name = "html"
+language-servers = ["vscode-html-language-server", "emmet-ls", "tailwindcss-ls"]
+formatter = { command = 'prettier', args = ["--parser", "html"] }
+# formatter = { command = 'dprint', args = ["--parser", "html"] }
+auto-format = true
+
+[[language]]
+name = "css"
+language-servers = ["vscode-css-language-server", "emmet-ls", "tailwindcss-ls"]
+formatter = { command = 'prettier', args = ["--parser", "css"] }
+# formatter = { command = 'dprint', args = ["--parser", "css"] }
+auto-format = true

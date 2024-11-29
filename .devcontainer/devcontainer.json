@@ -1,0 +1,28 @@
+{
+    "name": "x",
+    "dockerFile": "Dockerfile",
+    // "service": "app",
+    // "envFile": "${localWorkspaceFolder}/.env",
+    // "initializeCommand": "./.devcontainer/infrastructure/setup_network.sh",
+    // "dockerComposeFile": [
+    // "docker-compose.app.yml"
+    // "infrastructure/docker-compose.extra.yml"
+    // ],
+    // The 'workspaceFolder' property is the path VS Code should open by default when
+    // connected. Corresponds to a volume mount in .devcontainer/docker-compose.yml
+    "workspaceFolder": "/workspace",
+    // "build": {
+    // 	"dockerfile": "Dockerfile"
+    // },
+    "customizations": {
+        "vscode": {}
+    },
+    // Comment out to connect as root instead. To add a non-root user, see: https://aka.ms/vscode-remote/containers/non-root.
+    // not only need to specify the user in the Dockerfile, but also need to specify the user in the devcontainer.json
+    "remoteUser": "x",
+    "containerUser": "x",
+    "features": {},
+    // Uncomment the next line if you want to keep your containers running after VS Code shuts down.
+    "shutdownAction": "none",
+    "postCreateCommand": ""
+}
